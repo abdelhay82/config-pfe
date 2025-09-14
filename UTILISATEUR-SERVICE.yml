@@ -1,0 +1,72 @@
+spring:
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      enabled: true
+  datasource:
+    url: jdbc:mariadb://localhost:3308/utilisateur?createDatabaseIfNotExist=true
+    username: root
+    password: 1234567890
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: localhost
+    port: 9025
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: user-service-group
+      group-id-notif: daret-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+            use:
+              type:
+                headers: false
+    topic:
+      name: user-events
+      name-notif: notif-events
+
+server:
+  port: 8082
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    dev:
+      langchain4j: DEBUG
+      ai4j:
+        openai4j: DEBUG
+    ai:
+      djl: OFF
+
+
