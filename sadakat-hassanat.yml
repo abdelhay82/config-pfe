@@ -1,0 +1,36 @@
+spring:
+  mail:
+    host: hostname
+    port: 9025
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      enabled: false
+  datasource:
+    url: jdbc:mariadb://localhost:3308/sadakat?createDatabaseIfNotExist=true
+    username: root
+    password: "1234567890"
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8084
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
