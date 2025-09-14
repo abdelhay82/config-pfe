@@ -6,7 +6,7 @@ spring:
     discovery:
       enabled: true
     config:
-      enabled: false
+      enabled: true
   datasource:
     url: jdbc:mariadb://localhost:3308/sadakat?createDatabaseIfNotExist=true
     username: root
